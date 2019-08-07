@@ -5,7 +5,6 @@ import com.justin.roloVDex.repository.CardDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.smartcardio.Card;
 import java.util.List;
 
 @Service

@@ -1,0 +1,28 @@
+spring:
+  profiles: local
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+  datasource:
+    platform:
+    url: jdbc:mysql://localhost:3306/rolovdex
+    username: root
+    password: password
+    driverClassName:
+
+---
+spring:
+  profiles: dev
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform:
+    url: mysql://fz6knmz9jmkxjgcf:lo7hyimoli2bhwjq@vhw3t8e71xdz9k14.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/eycxlobsb8flroe2
+    username: fz6knmz9jmkxjgcf
+    password: lo7hyimoli2bhwjq
+    driverClassName:

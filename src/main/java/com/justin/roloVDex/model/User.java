@@ -1,9 +1,8 @@
 package com.justin.roloVDex.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -15,6 +14,9 @@ public class User {
     private String lastName;
     private String username;
     private String password;
+
+    @ManyToMany
+    private LinkedHashSet<CardData> sharedCards;
 
     public User() { }
 
@@ -63,5 +65,12 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void update(User update) {
+        this.firstName = update.firstName;
+        this.lastName = update.lastName;
+        this.username = update.username;
+        this.password = update.password;
     }
 }

@@ -31,7 +31,7 @@ public class CardDataController {
 
     @PostMapping
     public ResponseEntity<CardData> post(@RequestBody CardData data) {
-        return new ResponseEntity<>(service.create(data), HttpStatus.OK);
+        return new ResponseEntity<>(service.create(data), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

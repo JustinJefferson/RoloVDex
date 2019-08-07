@@ -2,7 +2,7 @@ package com.justin.roloVDex.model;
 
 import javax.persistence.Entity;
 
-@Entity
+
 public class UserCardData {
 
     private Long userId;
