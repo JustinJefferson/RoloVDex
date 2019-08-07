@@ -14,7 +14,7 @@ spring:
 
 ---
 spring:
-  profiles: dev
+  profiles: prod
   jpa:
     database: mysql
     show-sql: true
@@ -22,7 +22,7 @@ spring:
       ddl-auto: none
   datasource:
     platform:
-    url: mysql://fz6knmz9jmkxjgcf:lo7hyimoli2bhwjq@vhw3t8e71xdz9k14.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/eycxlobsb8flroe2
-    username: fz6knmz9jmkxjgcf
-    password: lo7hyimoli2bhwjq
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
     driverClassName:
