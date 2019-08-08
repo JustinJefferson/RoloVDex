@@ -15,8 +15,8 @@ public class User {
     private String username;
     private String password;
 
-    @ManyToMany
-    private LinkedHashSet<CardData> sharedCards;
+    //@ManyToMany
+//    private LinkedHashSet<CardData> sharedCards;
 
     public User() { }
 

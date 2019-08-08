@@ -1,5 +1,4 @@
 spring:
-  profiles: local
   jpa:
     database: mysql
     show-sql: true
@@ -7,22 +6,8 @@ spring:
       ddl-auto: create
   datasource:
     platform:
-    url: jdbc:mysql://localhost:3306/rolovdex
-    username: root
-    password: password
-    driverClassName:
-
----
-spring:
-  profiles: prod
-  jpa:
-    database: mysql
-    show-sql: true
-    hibernate:
-      ddl-auto: none
-  datasource:
-    platform:
     url: ${JDBC_DATABASE_URL}
     username: ${JDBC_DATABASE_USERNAME}
     password: ${JDBC_DATABASE_PASSWORD}
     driverClassName:
+

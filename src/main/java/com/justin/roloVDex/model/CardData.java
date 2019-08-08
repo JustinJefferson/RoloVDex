@@ -22,8 +22,8 @@ public class CardData {
 
     private String imagePath;
 
-    @ManyToMany(mappedBy = "sharedCards")
-    private Set<User> usersWithCard;
+    //@ManyToMany(mappedBy = "sharedCards")
+    //private Set<User> usersWithCard;
 
     public CardData() { }
 
@@ -127,6 +127,14 @@ public class CardData {
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
+
+//    public Set<User> getUsersWithCard() {
+//        return usersWithCard;
+//    }
+//
+//    public void setUsersWithCard(Set<User> usersWithCard) {
+//        this.usersWithCard = usersWithCard;
+//    }
 
     public void update(CardData update) {
 
