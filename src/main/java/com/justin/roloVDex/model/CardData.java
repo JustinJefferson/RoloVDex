@@ -34,11 +34,11 @@ public class CardData {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties({"sharedCards", "yourCards"})
+    @JsonIgnoreProperties({"password", "sharedCards", "yourCards"})
     private User owner;
 
     @ManyToMany(mappedBy = "sharedCards")
-    @JsonIgnoreProperties({"sharedCards", "yourCards"})
+    @JsonIgnoreProperties({"password", "sharedCards", "yourCards"})
     private List<User> users;
 
     public CardData() { }

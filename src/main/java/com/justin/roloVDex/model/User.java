@@ -111,6 +111,10 @@ public class User {
         this.sharedCards = sharedCards;
     }
 
+    public void addCard(CardData cardData) {
+        sharedCards.add(cardData);
+    }
+
     public void update(User update) {
         this.firstName = update.firstName;
         this.lastName = update.lastName;

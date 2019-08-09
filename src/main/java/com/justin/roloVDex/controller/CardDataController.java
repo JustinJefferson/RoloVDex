@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Repository
-@RequestMapping("/carddata")
+@RequestMapping("/api/carddata")
 public class CardDataController {
 
     private CardDataService service;
