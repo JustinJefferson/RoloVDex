@@ -1,5 +1,6 @@
 package com.justin.roloVDex.controller;
 
+import com.justin.roloVDex.exception.InvalidInputException;
 import com.justin.roloVDex.model.CardData;
 import com.justin.roloVDex.services.CardDataService;
 import org.springframework.http.HttpStatus;
@@ -26,21 +27,44 @@ public class CardDataController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CardData> get(@PathVariable Long id) {
-        return new ResponseEntity<>(service.read(id), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(service.read(id), HttpStatus.OK);
+        }
+        catch(InvalidInputException ex) {
+            ex.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    @PostMapping
-    public ResponseEntity<CardData> post(@RequestBody CardData data) {
-        return new ResponseEntity<>(service.create(data), HttpStatus.CREATED);
+    @PostMapping("/{userId}")
+    public ResponseEntity<CardData> post(@RequestBody CardData data, @PathVariable Long userId) {
+        try {
+            return new ResponseEntity<>(service.create(data, userId), HttpStatus.CREATED);
+        }
+        catch(InvalidInputException ex) {
+            ex.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CardData> put(@PathVariable Long id, @RequestBody CardData data) {
-        return new ResponseEntity<>(service.update(id, data), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(service.update(id, data), HttpStatus.OK);
+        }
+        catch(InvalidInputException ex) {
+            ex.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-        return new ResponseEntity<>(service.delete(id), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(service.delete(id), HttpStatus.OK);
+        }
+        catch(InvalidInputException ex) {
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
     }
 }

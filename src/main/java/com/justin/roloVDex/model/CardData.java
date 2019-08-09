@@ -1,6 +1,12 @@
 package com.justin.roloVDex.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -8,8 +14,8 @@ public class CardData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "card_data_id")
     private Long id;
-    private Long userId;
 
     private String name;
     private String jobTitle;
@@ -19,16 +25,25 @@ public class CardData {
     private String city;
     private String state;
     private String zipcode;
-
     private String imagePath;
 
-    //@ManyToMany(mappedBy = "sharedCards")
-    //private Set<User> usersWithCard;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateCreated;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateUpdated;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"sharedCards", "yourCards"})
+    private User owner;
+
+    @ManyToMany(mappedBy = "sharedCards")
+    @JsonIgnoreProperties({"sharedCards", "yourCards"})
+    private List<User> users;
 
     public CardData() { }
 
-    public CardData(Long userId, String name, String jobTitle, String company, String addressLine1, String addressLine2, String city, String state, String zipcode, String imagePath) {
-        this.userId = userId;
+    public CardData(String name, String jobTitle, String company, String addressLine1, String addressLine2, String city, String state, String zipcode, String imagePath, LocalDate dateCreated, LocalDate dateUpdated, User owner, List<User> users) {
         this.name = name;
         this.jobTitle = jobTitle;
         this.company = company;
@@ -38,6 +53,10 @@ public class CardData {
         this.state = state;
         this.zipcode = zipcode;
         this.imagePath = imagePath;
+        this.dateCreated = dateCreated;
+        this.dateUpdated = dateUpdated;
+        this.owner = owner;
+        this.users = users;
     }
 
     public Long getId() {
@@ -46,14 +65,6 @@ public class CardData {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getName() {
@@ -128,13 +139,37 @@ public class CardData {
         this.imagePath = imagePath;
     }
 
-//    public Set<User> getUsersWithCard() {
-//        return usersWithCard;
-//    }
-//
-//    public void setUsersWithCard(Set<User> usersWithCard) {
-//        this.usersWithCard = usersWithCard;
-//    }
+    public LocalDate getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public LocalDate getDateUpdated() {
+        return dateUpdated;
+    }
+
+    public void setDateUpdated(LocalDate dateUpdated) {
+        this.dateUpdated = dateUpdated;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 
     public void update(CardData update) {
 
@@ -148,6 +183,8 @@ public class CardData {
         this.state = update.state;
         this.zipcode = update.zipcode;
         this.imagePath = update.imagePath;
+        this.owner = update.owner;
+        this.users = update.users;
 
     }
 }
