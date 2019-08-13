@@ -12,6 +12,7 @@ import java.util.List;
 
 @Repository
 @RequestMapping("/api/carddata")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CardDataController {
 
     private CardDataService service;
